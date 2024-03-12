@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BANDMATE</title>
+    <link rel="icon" type="image/png" href="media/others/BANDMATELOGOV2.png"/>
+    <style>
+          .navbar-brand,
+        .navbar-nav .nav-link {
+            color: black;
+            font-family: 'Figtree', sans-serif;
+            font-weight: bold;
+        }
+
+        .navbar-nav .nav-link:hover {
+            opacity: 0.8;
+            color: #F72798;
+        }
+
+    </style>
+    
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #EBF400; color: black;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Version 1</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link active" href="/">Inicio</a>
+                    <a class="nav-item nav-link active" href="/offer">Ofertas</a>
+                    <a class="nav-item nav-link custom-black" href="/project_filter">Busca tu banda</a>
+                    <a class="nav-item nav-link custom-black" href="/user_filter">Busca a tus músicos</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+</body>
+</html>
+
+{% block content %}
+{% endblock %}
