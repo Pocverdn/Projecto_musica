@@ -53,6 +53,7 @@
         select, input {
             margin-top: 5px;
             padding: 5px;
+            border-radius: 15px;
         }
     </style>
 </head>
@@ -64,7 +65,7 @@
         <form method="POST">
             {% csrf_token %}
             
-            <label for="lang">Genero</label>
+            <label for="lang">Género</label>
             <select name="Genero" id="lang">
                 <option value="space"></option>
                 <option value="Hombre">Hombre</option>
@@ -72,7 +73,7 @@
                 <option value="Transgenero">Transgenero</option>
             </select>
 
-            <label for="lang">Experiencia (AÑOS)</label>
+            <label for="lang">Años de experiencia</label>
             <select name="Cantidad de eventos" id="lang">
                 <option value="space"></option>
                 <option value="0">0</option>
@@ -92,7 +93,7 @@
                 <option value="Bajo">Bajo</option>
             </select>
         
-            <label for="lang">Genero de musica</label>
+            <label for="lang">Género de música</label>
             <select name="genero de musica" id="lang">
                 <option value="space"></option>
                 <option value="Rock">Rock</option>

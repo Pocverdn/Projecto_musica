@@ -19,6 +19,7 @@ from django.urls import path
 from filter import views as filterViews
 from main import views as mainViews
 from offer import views as offerViews
+from connections import views as connectionsViews
 
 from django.conf.urls.static import static
 from django.conf import settings
@@ -35,6 +36,7 @@ urlpatterns = [
     path('project_filter/', filterViews.filter_project),
     path('result_user/', filterViews.result_user),
     path('result_project/', filterViews.result_project),
+    path('connections/', connectionsViews.myConnection),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

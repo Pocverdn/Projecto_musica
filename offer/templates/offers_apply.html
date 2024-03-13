@@ -22,7 +22,7 @@
 
     h1 {
         color: white;
-        margin-bottom: 20px;
+        margin-top: 300px;
     }
 
     .specifications {
@@ -59,10 +59,7 @@
     }
 </style>
 <body>
-
-
-    <h1>¡Postea tu oferta aquí!</h1>
-
+    <h1>¡Esto podría interesarte!</h1>
     <div class="specifications">
         <form method="POST">
             {% csrf_token %}
@@ -70,7 +67,7 @@
                 {% for f in fil %}
                     <div class="card item" style="width: 18rem;">
                         <div class="card-body">
-                            <input type="submit" class="card-title" name="project_name" value="{{ f.tittle_offer }}">
+                            <p class="card-text">{{ f.tittle_offer}}</p>
                             <p class="card-text">{{ f.description_offer }}</p>
                             <p class="card-text">REQUISITOS</p>
                             <p class="card-text">- {{ f.group_name }}</p>
@@ -79,6 +76,7 @@
                             <p class="card-text">- {{ f.genre }}</p>
                             <p class="card-text">- {{ f.years }}</p>
                             <p class="card-text">- {{ f.location }}</p>
+                            <input type="submit" class="card-title" value="Aplica ahora">
                         </div>
                     </div>
                 {% endfor %}
