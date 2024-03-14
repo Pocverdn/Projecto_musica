@@ -37,6 +37,8 @@ urlpatterns = [
     path('result_user/', filterViews.result_user),
     path('result_project/', filterViews.result_project),
     path('connections/', connectionsViews.myConnection),
+    path('band_page_conections/', connectionsViews.choose_band),
+    path('offers_page_connections/', connectionsViews.chosse_offer),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -24,4 +24,3 @@ class project(models.Model):
     description = models.TextField()
     num_events = models.IntegerField(default=0)
     num_integrants = models.IntegerField(default=1)
-    offers = models.ManyToManyField(offer)

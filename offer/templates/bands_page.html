@@ -71,7 +71,7 @@
                     <div class="card item" style="width: 18rem;">
                         <img class="card-img-top" src="{{ f.photo_project.url }}" alt="{{ f.project_name }} Photo">
                         <div class="card-body">
-                            <input type="submit" class="card-title" name="project_name" value="Publicar como {{ f.project_name }}">
+                            <input type="submit" class="card-title" name="project_name" value="{{ f.project_name }}">
                         </div>
                     </div>
                 {% endfor %}
