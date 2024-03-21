@@ -13,29 +13,29 @@
     <h1 class="texto">Estas personas están interesadas en colaborar contigo:</h1>
 
     {% for f in fil2 %}
-        {% for n in names %}
-
+    {% for n in names %}
         {% if n == f.user_name %}
         <div class="colum">
             <div class="col-sm-6">
-                <div class="card" id="card1", style="width: 18rem;">
+                <div class="card" id="card{{ forloop.counter }}", style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">¡Alguien ha aplicado!</h5>
                         <img class="card-img-top" src="{{ f.photo.url }}" alt="{{ f.user_name }} Photo">
                         <p class="card-text">Nombre: {{f.user_name}}</p>
                         <p class="card-text">Descripción: {{f.description}}</p>
                         <p class="card-text">Antes de tomar una decisión, <a href="#" target="_blank">revisa su perfil</a>.</p>
-                        <button class="btn btn-success" onclick="acceptRequest(1)">Aceptar</button>
-                        <button class="btn btn-danger" onclick="rejectRequest(1)">Rechazar</button>
-                        <button class="btn btn-primary" style="display: none" id="messageButton1" onclick="sendMessage(1)">Haz aceptado la solicitud, envía un mensaje</button>
-                        <p id="rejectedText1" style="display: none">Solicitud rechazada</p>
+                        <button class="btn btn-success" onclick="acceptRequest('{{ forloop.counter }}')">Aceptar</button>
+                        <button class="btn btn-danger" onclick="rejectRequest('{{ forloop.counter }}')">Rechazar</button>
+                        <button class="btn btn-primary" style="display: none" id="messageButton{{ forloop.counter }}" onclick="sendMessage({{ forloop.counter }})">Haz aceptado la solicitud, envía un mensaje</button>
+                        <p id="rejectedText{{ forloop.counter }}" style="display: none">Solicitud rechazada</p>
                     </div>
                 </div>
             </div>
         </div>
         {% endif %}
-        {% endfor %}
     {% endfor %}
+{% endfor %}
+
 
     <style>
 
@@ -69,11 +69,6 @@
         function rejectRequest(cardNumber) {
             document.getElementById(`card${cardNumber}`).querySelectorAll('button').forEach(button => button.style.display = 'none');
             document.getElementById(`rejectedText${cardNumber}`).style.display = 'block';
-        }
-
-        function sendMessage(cardNumber) {
-            
-            console.log(`Mensaje enviado desde la tarjeta ${cardNumber}`);
         }
     </script>
 </body>
