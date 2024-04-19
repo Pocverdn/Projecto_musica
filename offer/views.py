@@ -28,6 +28,19 @@ def choose_band(request):
         band=request.POST
         return redirect("/offer_post/")
     
+def band_delete (request):
+    fil = project.objects.all()
+    contex = {"fil": fil}
+
+    if request.method == 'GET':
+        return render(request, "bands_delete.html", contex)
+    
+    else:
+        global band
+        band = ""
+        band=request.POST
+        return redirect("/offer_delete/")
+       
 
 def choose_user(request):
     fil = user.objects.all()
@@ -50,7 +63,7 @@ def apply_offer(request):
     if request.method == 'GET':
         return render(request, "offers_apply.html", contex)
     
-    else:
+    elif 'project_name' in request.POST:
         global offe
         global users
         offe = ""
@@ -58,7 +71,29 @@ def apply_offer(request):
         ofer = offer.objects.get(tittle_offer=offe['project_name'])
         ofer.add_applicant(users['name'])
         return redirect("/offer/")
+        
+    elif 'project_delete' in request.POST:
+        global offet 
+        offet = ""
+        offet = request.POST
+        ofer = offer.objects.get(tittle_offer=offet['project_delete'])    
+        ofer.delete()
+        return redirect("/offer/")
+        
+def delete_offer(request):
+    fil = offer.objects.filter(group_name=band["project_name"])
+    contex = {"fil": fil}
 
+    if request.method == 'GET':
+        return render(request, "offers_delete.html", contex)
+        
+    elif 'project_delete' in request.POST:
+        global offet 
+        offet = ""
+        offet = request.POST
+        ofer = offer.objects.get(tittle_offer=offet['project_delete'])    
+        ofer.delete()
+        return redirect("/offer/")        
 
 def offers_post(request):
     if request.method == 'GET':
