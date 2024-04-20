@@ -22,7 +22,7 @@
 
     h1 {
         color: white;
-        margin-top: 300px;
+        margin-bottom: 20px;
     }
 
     .specifications {
@@ -59,27 +59,30 @@
     }
 </style>
 <body>
-    <h1>¡Esto podría interesarte!</h1>
+
+
+    <h1>Elige el género musical.</h1>
+
     <div class="specifications">
         <form method="POST">
             {% csrf_token %}
             <div class="container">
-                {% for f in fil %}
-                    <div class="card item" style="width: 18rem;">
-                        <div class="card-body">
-                            <p class="card-text">{{ f.tittle_offer}}</p>
-                            <p class="card-text">{{ f.description_offer }}</p>
-                            <p class="card-text">Grupo: {{ f.group_name }}</p>
-                            <p class="card-text">REQUISITOS</p>
-                            <p class="card-text">- {{ f.gender }}</p>
-                            <p class="card-text">- {{ f.instruments }}</p>
-                            <p class="card-text">- {{ f.genre }}</p>
-                            <p class="card-text">- {{ f.years }} años de experiencia</p>
-                            <p class="card-text">- {{ f.location }}</p>
-                            <input type="submit" class="card-title" name="project_name" value="{{ f.tittle_offer}}">
-                        </div>
+                <div class="card item" style="width: 18rem;">
+                    
+                    <div class="card-body">
+                        <input type="submit" class="card-title" name="Genre" value="Jazz">
+                        <input type="submit" class="card-title" name="Genre" value="Rock">
+                        <input type="submit" class="card-title" name="Genre" value="Metal">
+                        <input type="submit" class="card-title" name="Genre" value="Salsa">
+                        <input type="submit" class="card-title" name="Genre" value="Pop">
                     </div>
-                {% endfor %}
+                </div>
+
+                <div class="card item" style="width: 18rem;">
+                    <div class="card-body">
+                        <input type="submit" class="card-title" name="Genre" value="populares">
+                    </div>
+                </div>
             </div>
         </form>
     </div>

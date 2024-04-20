@@ -27,6 +27,8 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', mainViews.index),
+    path('map_page/', mainViews.map_view),
+    path('map_connect/', mainViews.map_connect),
     path('offer/', offerViews.offers),
     path('offer_post/', offerViews.offers_post),
     path('band_page/', offerViews.choose_band),
