@@ -59,7 +59,7 @@
     }
 </style>
 <body>
-    <h1>¡Esto podría interesarte!</h1>
+    <h1>¡Elige que quieres borrar!</h1>
     <div class="specifications">
         <form method="POST">
             {% csrf_token %}
@@ -74,10 +74,9 @@
                             <p class="card-text">- {{ f.gender }}</p>
                             <p class="card-text">- {{ f.instruments }}</p>
                             <p class="card-text">- {{ f.genre }}</p>
-                            <p class="card-text">- {{ f.years }} años de experiencia</p>
+                            <p class="card-text">- {{ f.years }}</p>
                             <p class="card-text">- {{ f.location }}</p>
-                            <input type="submit" class="card-title" name="project_name" value="{{ f.tittle_offer}}">
-							
+							<input type="submit" class="card-title" name="project_delete" value="{{ f.tittle_offer}}">
                         </div>
                     </div>
                 {% endfor %}
