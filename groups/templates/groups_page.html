@@ -1,0 +1,134 @@
+{% extends 'layout/base_groups.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="media/others/BANDMATELOGOV2.png"/>
+    <title>BANDMATE</title>
+
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            flex: 1; 
+            width: 100%;
+        }
+
+        .right-column {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .image {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 10px; 
+        }
+
+        .card {
+            width: 350px; 
+            height: 350px; 
+            margin-right: 200px; /* Espacio entre las tarjetas */
+            background-color: white; 
+            color: black; 
+        }
+
+        .card-img-top {
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            height: 60%; /* Altura de la imagen */
+            object-fit: cover; /* Ajusta la imagen dentro de la tarjeta */
+        }
+
+        .card-body {
+            background-color: white; /* Color de fondo de la tarjeta */
+            color: black; /* Color del texto */
+            border-color: transparent;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            height: 70%; /* Altura del cuerpo de la tarjeta */
+            padding: 10px;
+        }
+
+        .btn-custom {
+            background-color: #F57D1F;
+            border-radius: 15px; 
+            margin-top: 10px;
+        }
+
+        .btn-custom:hover {
+            background-color: #F72798;
+            color: white; 
+        }
+
+        .link {
+            font-size: 20px; 
+            text-decoration: underline; 
+            margin-bottom: 20px; 
+            text-decoration-color: white;
+            color: white; /* Color del enlace */
+        }
+
+        .link:hover {
+            color: #F72798; /* Color del enlace al hacer hover */
+        }
+
+    </style>
+    
+</head>
+<body>
+
+<div class="content-container">
+    <div class="right-column">
+        <h1>Estos son tus grupos:</h1>
+        <br>
+        {% if groups %}
+            <div class="row">
+                {% for group in groups %}
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="{{ group.img.url }}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ group.name }}</h5>
+                            <p class="card-text">{{ group.description }}</p>
+                            <a href="#" class="btn btn-custom">Configuraciones</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>Aún no tienes grupos.</p>
+        {% endif %}
+        <br>
+        <br>
+        <br>
+        <br>
+        <a href="/create_group/" class="link">Crea un nuevo grupo</a>
+        <br>
+        <br>
+    </div>
+</div>
+
+</body>
+</html>
+{% endblock %}

@@ -20,7 +20,7 @@ from filter import views as filterViews
 from main import views as mainViews
 from offer import views as offerViews
 from connections import views as connectionsViews
-
+from groups import views as groupsViews
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -43,6 +43,8 @@ urlpatterns = [
     path('connections/', connectionsViews.myConnection),
     path('band_page_conections/', connectionsViews.choose_band),
     path('offers_page_connections/', connectionsViews.chosse_offer),
+    path('groups_page/', groupsViews.groups,  name='groups_page'),
+    path('create_group/', groupsViews.create_groups, name = 'create_groups'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

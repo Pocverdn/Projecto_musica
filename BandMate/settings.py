@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'filter',
     'offer',
     'connections',
+    'groups',
 ]
 
 MIDDLEWARE = [
