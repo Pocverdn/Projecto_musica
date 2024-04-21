@@ -28,6 +28,30 @@ def map_connect(request):
     
 
 
+def groups(request):
+    groups = project.objects.all()
+    return render(request, "groups_page.html", {'groups': groups})
+
+def create_groups(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        description = request.POST.get('description')
+        genre = request.POST.get('genre')
+        location = request.POST.get('location')
+        integrants = request.POST.get('integrantes')
+        exp = request.POST.get('exp')
+        img = request.FILES.get('img')
+        
+        print(integrants)
+        print(exp)
+
+        group = project(project_name=name, genre=genre, location=location, photo_project=img, description=description, num_events=exp, num_integrants=integrants)
+        group.save()
+        
+        return redirect('groups_page')  
+    return render(request, "create_groups.html")
+
+
 
 def map_view(request):
 

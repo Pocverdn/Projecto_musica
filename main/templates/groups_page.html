@@ -1,4 +1,4 @@
-{% extends 'layout/base_groups.html' %}
+{% extends 'layout/base_g.html' %}
 {% load static %}
 
 {% block content %}
@@ -106,9 +106,9 @@
                 {% for group in groups %}
                 <div class="col-md-4">
                     <div class="card">
-                        <img src="{{ group.img.url }}" class="card-img-top" alt="...">
+                        <img src="{{ group.photo_project.url }}" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">{{ group.name }}</h5>
+                            <h5 class="card-title">{{ group.project_name }}</h5>
                             <p class="card-text">{{ group.description }}</p>
                             <a href="#" class="btn btn-custom">Configuraciones</a>
                         </div>
