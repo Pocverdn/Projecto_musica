@@ -27,6 +27,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', mainViews.index),
     path('map_page/', mainViews.map_view),
+    path('graph_page/', mainViews.graph_view,  name='graph_page'),
     path('map_connect/', mainViews.map_connect),
     path('offer/', offerViews.offers),
     path('offer_post/', offerViews.offers_post),

@@ -1,4 +1,4 @@
-{% extends 'layout/base_connections.html' %}    
+{% extends 'layout/base.html' %}    
 {% block content %}
 
 <!DOCTYPE html>
@@ -18,20 +18,10 @@
             justify-content: center;
             align-items: center;
         }
-
-        #map-container {
-            width: 80%; 
-            height: 80%;
-            margin-left: 20%;
-            overflow: auto; 
-            border: 1px solid #ccc;
-        }
     </style>
 </head>
 <body>
-    <div id="map-container">
-        {{ map_html|safe }}
-    </div>
+    {{ map_html|safe }}
 </body>
 </html>
 

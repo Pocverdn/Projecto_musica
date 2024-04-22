@@ -2,3 +2,4 @@ django
 pillow
 pandas
 matplotlib
+folium

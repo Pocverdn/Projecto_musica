@@ -1,6 +1,8 @@
 import folium
 from django.shortcuts import render, redirect
 from django.db.models import Count
+import matplotlib.pyplot as plt
+
 
 from .models import project
 
@@ -51,7 +53,46 @@ def create_groups(request):
         return redirect('groups_page')  
     return render(request, "create_groups.html")
 
+def do_graph():
+    data = project.objects.values('location', 'genre').annotate(num_projects=Count('id'))
 
+    # Crear un diccionario para almacenar los datos
+    data_dict = {}
+    for entry in data:
+        location = entry['location']
+        genre = entry['genre']
+        num_projects = entry['num_projects']
+        if location not in data_dict:
+            data_dict[location] = {}
+        if genre not in data_dict[location]:
+            data_dict[location][genre] = num_projects
+        else:
+            data_dict[location][genre] += num_projects
+
+    # Obtener las ciudades y géneros únicos
+    locations = list(data_dict.keys())
+    genres = set()
+    for projects in data_dict.values():
+        genres.update(projects.keys())
+
+    # Crear una barra para cada género en cada ciudad
+    width = 0.2
+    x = range(len(genres))
+    for i, (location, projects) in enumerate(data_dict.items()):
+        projects_count = [projects.get(genre, 0) for genre in genres]
+        plt.bar([pos + i * width for pos in x], projects_count, width=width, label=location)
+
+    plt.xlabel('Género')
+    plt.ylabel('Número de Proyectos')
+    plt.title('Proyectos por Género y Ciudad')
+    plt.xticks([pos + width * (len(locations) - 1) / 2 for pos in x], list(genres))
+    plt.legend(title='Ciudad')
+
+    plt.savefig('media/others/graph.png')
+
+
+def graph_view(request):
+    return render(request, "graph.html")
 
 def map_view(request):
 
@@ -128,7 +169,7 @@ def map_view(request):
                 popup_content += f"<br>{v[0]}: {v[1]}"
                 folium.CircleMarker(location=[4.6243, -74.0636], radius=v[1]*10, color='red', fill=True, fill_opacity=v[1]/10, popup=popup_content).add_to(p)
 
-            if r == "Cali" and C>0:
+            if r == "Cali":
                 popup_content += f"<br>{v[0]}: {v[1]}"
                 folium.CircleMarker(location=[3.4516, -76.5320], radius=v[1]*10, color='yellow', fill=True, fill_opacity=v[1]/10, popup=popup_content).add_to(p)
     
@@ -138,5 +179,8 @@ def map_view(request):
     
     if genre['Genre'] == "populares":
         return render(request, 'map.html', {'map_html': map_html2})
+    elif genre['Genre'] == "Grafica":
+        do_graph()
+        return redirect('graph_page')  
     else:
         return render(request, 'map.html', {'map_html': map_html})
