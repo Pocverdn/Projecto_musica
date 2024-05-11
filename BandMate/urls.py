@@ -15,21 +15,25 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.contrib.auth import views as auth_views
 from filter import views as filterViews
 from main import views as mainViews
 from offer import views as offerViews
 from connections import views as connectionsViews
 from django.conf.urls.static import static
 from django.conf import settings
+from login_register import views as viewsRegister
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', mainViews.index),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('', auth_views.LoginView.as_view(), name='login'),  
+    path('home/', mainViews.index, name='home'), 
     path('map_page/', mainViews.map_view),
     path('graph_page/', mainViews.graph_view,  name='graph_page'),
     path('map_connect/', mainViews.map_connect),
-    path('offer/', offerViews.offers),
+    path('home/offer/', offerViews.offers),
     path('offer_post/', offerViews.offers_post),
     path('band_page/', offerViews.choose_band),
     path('band_delete/', offerViews.band_delete),
@@ -43,8 +47,9 @@ urlpatterns = [
     path('connections/', connectionsViews.myConnection),
     path('band_page_conections/', connectionsViews.choose_band),
     path('offers_page_connections/', connectionsViews.chosse_offer),
-    path('groups_page/', mainViews.groups,  name='groups_page'),
+    path('home/groups_page/', mainViews.groups,  name='groups_page'),
     path('create_group/', mainViews.create_groups, name = 'create_groups'),
+    path('registro/', viewsRegister.registro, name='registro'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

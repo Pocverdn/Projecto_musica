@@ -2,7 +2,7 @@ import folium
 from django.shortcuts import render, redirect
 from django.db.models import Count
 import matplotlib.pyplot as plt
-
+from django.contrib.auth.decorators import login_required
 
 from .models import project
 
@@ -12,6 +12,7 @@ genre = ""
 
 # Create your views here.
 
+@login_required
 def index(request):
     return render(request, "index.html")
 
@@ -28,7 +29,6 @@ def map_connect(request):
         print(genre['Genre'])
         return redirect("/map_page/")
     
-
 
 def groups(request):
     groups = project.objects.all()
