@@ -24,11 +24,15 @@ from connections import views as connectionsViews
 from django.conf.urls.static import static
 from django.conf import settings
 from login_register import views as viewsRegister
+from django.contrib.auth.views import LogoutView
+from django.urls import reverse_lazy
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', auth_views.LoginView.as_view(), name='login'),  
+    path('logout/', LogoutView.as_view(next_page=reverse_lazy('login')), name='logout'),
     path('home/', mainViews.index, name='home'), 
     path('map_page/', mainViews.map_view),
     path('graph_page/', mainViews.graph_view,  name='graph_page'),
