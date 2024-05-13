@@ -22,12 +22,20 @@
         h2 {
             color: white;
             margin-bottom: 20px;
+            margin-right: 300px;
         }
 
         form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            margin-top: 20px;
+            text-align: center; 
+        }
+
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
         }
 
         form button {
@@ -48,21 +56,79 @@
         label {
             margin-top: 10px;
             color: white;
+            display: block; 
         }
 
-        select, input {
+        select, input, textarea, .foto-input {
             margin-top: 5px;
             padding: 5px;
             border-radius: 15px;
+            width: 300px; 
+            display: block; 
+            margin: 10px auto; 
         }
     </style>
 </head>
 <body>
-    <h2>Regístrate</h2>
-    <form method="post">
+    <h2>¡Regístrate ahora!</h2>
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Registrarse</button>
+        <div class="form-step active" id="step-1">
+            <label for="id_username">Nombre de usuario:</label>
+            {{ form.username }}
+            <label for="id_password1">Contraseña:</label>
+            {{ form.password1 }}
+            <label for="id_password2">Confirmar contraseña:</label>
+            {{ form.password2 }}
+            <button type="button" onclick="nextStep(1)">Siguiente</button>
+        </div>
+        <div class="form-step" id="step-2">
+            <label for="id_nombre">Nombre:</label>
+            {{ form.nombre }}
+            <label for="id_apellido">Apellido:</label>
+            {{ form.apellido }}
+            <label for="id_instrumentos">Instrumento:</label>
+            {{ form.instrumentos }}
+            <button type="button" onclick="prevStep(2)">Regresar</button>
+            <button type="button" onclick="nextStep(2)">Siguiente</button>
+        </div>
+        <div class="form-step" id="step-3">
+            <label for="id_ubicación">Ubicación:</label>
+            {{ form.ubicación }}
+            <label for="id_género_biológico">Género biológico:</label>
+            {{ form.género_biológico }}
+            <label for="id_género_musical">Género musical:</label>
+            {{ form.género_musical }}
+            <button type="button" onclick="prevStep(3)">Regresar</button>
+            <button type="button" onclick="nextStep(3)">Siguiente</button>
+        </div>
+        <div class="form-step" id="step-4">
+            <label for="id_experiencia_años">Experiencia en años:</label>
+            {{ form.experiencia_años }}
+            <label for="id_descripción">Descripción:</label>
+            {{ form.descripción }}
+            <label for="id_foto">Foto:</label>
+            {{ form.foto }}
+            <button type="button" onclick="prevStep(4)">Regresar</button>
+            <button type="submit">Registrarse</button>
+        </div>
     </form>
+
+    <script>
+        function nextStep(step) {
+            var currentStep = document.getElementById("step-" + step);
+            currentStep.classList.remove("active");
+            var nextStep = document.getElementById("step-" + (step + 1));
+            nextStep.classList.add("active");
+        }
+
+        function prevStep(step) {
+            var currentStep = document.getElementById("step-" + step);
+            currentStep.classList.remove("active");
+            var prevStep = document.getElementById("step-" + (step - 1));
+            prevStep.classList.add("active");
+        }
+    </script>
 </body>
 </html>
+

@@ -111,7 +111,10 @@
             <h2>¡Bienvenido de vuelta!</h2>
             <form method="post" class="filter">
                 {% csrf_token %}
-                {{ form.as_p }}
+                <label for="id_username">Nombre de usuario:</label>
+                {{ form.username }}
+                <label for="id_password">Contraseña:</label>
+                {{ form.password }}
                 <button type="submit">Ingresar</button>
                 <p>¿No tienes cuenta? <a href="registro/">Regístrate</a></p>
             </form>
