@@ -54,6 +54,7 @@ urlpatterns = [
     path('home/groups_page/', mainViews.groups,  name='groups_page'),
     path('create_group/', mainViews.create_groups, name = 'create_groups'),
     path('registro/', viewsRegister.registro, name='registro'),
+    path('personal_page/', mainViews.personal),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

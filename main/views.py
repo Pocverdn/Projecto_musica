@@ -4,7 +4,7 @@ from django.db.models import Count
 import matplotlib.pyplot as plt
 from django.contrib.auth.decorators import login_required
 
-from .models import project
+from .models import project, user
 
 band = ""
 
@@ -14,8 +14,12 @@ genre = ""
 
 @login_required
 def index(request):
+    
     return render(request, "index.html")
 
+def personal(request):
+    m = user.objects.get(user_name="Santiago Pérez")
+    return render(request, "personal.html",{"m":m})
 
 def map_connect(request):
 
