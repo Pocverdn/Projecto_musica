@@ -3,11 +3,12 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 opciones_numeros = [(str(i), str(i)) for i in range(6)]
+
 class RegistroForm(UserCreationForm):
-    instrumentos = forms.ChoiceField(choices=(('G', 'Guitarra'), ('Pn', 'Piano'), ('Bat', 'Batería'), ('Baj', 'Bajo')))
-    ubicación = forms.ChoiceField(choices=(('C', 'Cali'), ('Mde', 'Medellín'), ('Bgta', 'Bogotá')))
-    género_biológico = forms.ChoiceField(choices=(('M', 'Masculino'), ('F', 'Femenino'), ('O', 'Otro')))
-    género_musical = forms.ChoiceField(choices=(('R', 'Rock'), ('P', 'Pop'), ('J', 'Jazz'), ('S', 'Salsa'), ('M', 'Metal')))
+    instrumentos = forms.ChoiceField(choices=(('Guitarra', 'Guitarra'), ('Piano', 'Piano'), ('Batería', 'Batería'), ('Bajo', 'Bajo')))
+    ubicación = forms.ChoiceField(choices=(('Cali', 'Cali'), ('Medellín', 'Medellín'), ('Bogotá', 'Bogotá')))
+    género_biológico = forms.ChoiceField(choices=(('Masculino', 'Masculino'), ('Femenino', 'Femenino'), ('Otro', 'Otro')))
+    género_musical = forms.ChoiceField(choices=(('Rock', 'Rock'), ('Pop', 'Pop'), ('Jazz', 'Jazz'), ('Salsa', 'Salsa'), ('Metal', 'Metal')))
     experiencia_años= forms.ChoiceField(choices=opciones_numeros)
     nombre = forms.CharField(max_length=100)
     apellido = forms.CharField(max_length=100)
@@ -23,4 +24,3 @@ class RegistroForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'password1', 'password2', 'nombre', 'apellido','instrumentos', 'ubicación', 'género_biológico', 'género_musical', 'experiencia_años', 'descripción', 'foto']
-

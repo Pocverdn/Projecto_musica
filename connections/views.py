@@ -8,8 +8,15 @@ offe = ""
 
 
 def choose_band(request):
-    fil = project.objects.all()
-    contex = {"fil": fil}
+    username = request.session.get('logged_in_user', None)
+    User = user.objects.get(user_name = username)
+
+    bands = [band for band in User.bands.split(',')]
+    groups = project.objects.filter(project_name__in=bands)
+
+    contex = {"fil": groups}
+
+    
 
     if request.method == 'GET':
         return render(request, "bands_page_connections.html", contex)

@@ -16,8 +16,13 @@ def offers(request):
 
 
 def choose_band(request):
-    fil = project.objects.all()
-    contex = {"fil": fil}
+    username = request.session.get('logged_in_user', None)
+    User = user.objects.get(user_name = username)
+
+    bands = [band for band in User.bands.split(',')]
+    groups = project.objects.filter(project_name__in=bands)
+
+    contex = {"fil": groups}
 
     if request.method == 'GET':
         return render(request, "bands_page.html", contex)
@@ -29,8 +34,17 @@ def choose_band(request):
         return redirect("/offer_post/")
     
 def band_delete (request):
-    fil = project.objects.all()
-    contex = {"fil": fil}
+    username = request.session.get('logged_in_user', None)
+    User = user.objects.get(user_name = username)
+
+    if User.bands is not None:
+        bands = [band for band in User.bands.split(',')]
+
+    else:
+        bands = [""]
+    groups = project.objects.filter(project_name__in=bands)
+
+    contex = {"fil": groups}
 
     if request.method == 'GET':
         return render(request, "bands_delete.html", contex)
@@ -59,18 +73,19 @@ def choose_user(request):
 def apply_offer(request):
     fil = offer.objects.all()
     contex = {"fil": fil}
+    username = request.session.get('logged_in_user', None)
+    User = user.objects.get(user_name = username)
 
     if request.method == 'GET':
         return render(request, "offers_apply.html", contex)
     
     elif 'project_name' in request.POST:
         global offe
-        global users
         offe = ""
         offe = request.POST
         ofer = offer.objects.get(tittle_offer=offe['project_name'])
-        ofer.add_applicant(users['name'])
-        return redirect("/offer/")
+        ofer.add_applicant(User.user_name)
+        return redirect("/home/offer/")
         
     elif 'project_delete' in request.POST:
         global offet 
@@ -78,7 +93,7 @@ def apply_offer(request):
         offet = request.POST
         ofer = offer.objects.get(tittle_offer=offet['project_delete'])    
         ofer.delete()
-        return redirect("/offer/")
+        return redirect("/home/offer/")
         
 def delete_offer(request):
     fil = offer.objects.filter(group_name=band["project_name"])
@@ -93,7 +108,7 @@ def delete_offer(request):
         offet = request.POST
         ofer = offer.objects.get(tittle_offer=offet['project_delete'])    
         ofer.delete()
-        return redirect("/offer/")        
+        return redirect("/home/offer/")        
 
 def offers_post(request):
     if request.method == 'GET':
@@ -120,7 +135,7 @@ def offers_post(request):
         instace.save()
 
         print(post_o)
-        return redirect("/offer/")
+        return redirect("/home/offer/")
     
 
     

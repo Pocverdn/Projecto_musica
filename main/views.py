@@ -4,7 +4,7 @@ from django.db.models import Count
 import matplotlib.pyplot as plt
 from django.contrib.auth.decorators import login_required
 
-from .models import project
+from .models import project, user
 
 band = ""
 
@@ -14,6 +14,7 @@ genre = ""
 
 @login_required
 def index(request):
+    username = request.session.get('logged_in_user', None)
     return render(request, "index.html")
 
 
@@ -31,8 +32,36 @@ def map_connect(request):
     
 
 def groups(request):
-    groups = project.objects.all()
-    return render(request, "groups_page.html", {'groups': groups})
+    limit_bands = False
+    username = request.session.get('logged_in_user', None)
+    User = user.objects.get(user_name = username)
+
+    if User.bands is not None:
+        bands = [band for band in User.bands.split(',')]
+
+    else:
+        bands = [""]
+
+    groups = project.objects.filter(project_name__in=bands)
+
+    print(len(bands))
+
+    if len(bands) >= 3:
+        limit_bands = True
+
+    if request.method == 'POST' and 'Borrar' in request.POST:
+        band_name = request.POST.get('band_name')
+        band = project.objects.get(project_name = band_name)
+
+        band.delete()
+
+        User.delete_band(band_name)
+
+        
+        limit_bands = False
+        
+
+    return render(request, "groups_page.html", {'groups': groups, 'limit': limit_bands})
 
 def create_groups(request):
     if request.method == "POST":
@@ -49,6 +78,11 @@ def create_groups(request):
 
         group = project(project_name=name, genre=genre, location=location, photo_project=img, description=description, num_events=exp, num_integrants=integrants)
         group.save()
+
+        username = request.session.get('logged_in_user', None)
+        User = user.objects.get(user_name = username)
+
+        User.add_bands(name)
         
         return redirect('groups_page')  
     return render(request, "create_groups.html")
