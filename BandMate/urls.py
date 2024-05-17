@@ -31,7 +31,7 @@ from django.urls import reverse_lazy
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('', auth_views.LoginView.as_view(), name='login'),  
+    path('', viewsRegister.custom_login, name='login'),  
     path('logout/', LogoutView.as_view(next_page=reverse_lazy('login')), name='logout'),
     path('home/', mainViews.index, name='home'), 
     path('map_page/', mainViews.map_view),

@@ -115,7 +115,17 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ group.project_name }}</h5>
                             <p class="card-text">{{ group.description }}</p>
-                            <a href="#" class="btn btn-custom">Configuraciones</a>
+
+                            <div class="d-flex justify-content-between">
+                                <a href="#" class="btn btn-custom">Configuraciones</a>
+                                <form method="post" action="">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="band_name" value="{{ group.project_name }}">
+                                    <button type="submit" name="Borrar" class="btn btn-custom">Borrar</button>
+                                </form>
+                            </div>
+
+                            
                         </div>
                     </div>
                 </div>
@@ -128,7 +138,11 @@
         <br>
         <br>
         <br>
-        <a href="/create_group/" class="link">Crea un nuevo grupo</a>
+        {% if limit == False %}
+            <a href="/create_group/" class="link">Crea un nuevo grupo</a>
+        {% else %}
+            
+        {% endif %}
         <br>
         <br>
     </div>
