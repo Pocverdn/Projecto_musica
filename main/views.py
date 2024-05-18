@@ -71,6 +71,7 @@ def groups(request):
         
 
     return render(request, "groups_page.html", {'groups': groups, 'limit': limit_bands})
+
 def create_groups(request):
     if request.method == "POST":
         name = request.POST.get('name')
