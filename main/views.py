@@ -18,7 +18,7 @@ def index(request):
     return render(request, "index.html")
 
 def personal(request):
-    m = user.objects.get(user_name="Santiago Pérez")
+    m = user.objects.get(user_name="Santiago Sanchez")
     return render(request, "personal.html",{"m":m})
 
 def map_connect(request):
