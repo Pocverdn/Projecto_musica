@@ -23,7 +23,7 @@ def personal(request):
         global description
         description = ""
         description=request.POST
-        m.description = description['input']
+        m.description = description["w3review"]
     
     return render(request, "personal.html",{"m":m})
 
@@ -71,7 +71,6 @@ def groups(request):
         
 
     return render(request, "groups_page.html", {'groups': groups, 'limit': limit_bands})
-
 def create_groups(request):
     if request.method == "POST":
         name = request.POST.get('name')
