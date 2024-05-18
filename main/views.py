@@ -19,6 +19,12 @@ def index(request):
 
 def personal(request):
     m = user.objects.get(user_name="Santiago Sanchez")
+    if 'input' in request.POST:
+        global description
+        description = ""
+        description=request.POST
+        m.description = description['input']
+    
     return render(request, "personal.html",{"m":m})
 
 def map_connect(request):
