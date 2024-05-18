@@ -18,7 +18,7 @@ def index(request):
     return render(request, "index.html")
 
 def personal(request):
-    m = user.objects.get(user_name="Santiago Pérez")
+    m = user.objects.get(user_name="Santiago Sanchez")
     return render(request, "personal.html",{"m":m})
 
 def map_connect(request):
@@ -65,6 +65,7 @@ def groups(request):
         
 
     return render(request, "groups_page.html", {'groups': groups, 'limit': limit_bands})
+
 def create_groups(request):
     if request.method == "POST":
         name = request.POST.get('name')
