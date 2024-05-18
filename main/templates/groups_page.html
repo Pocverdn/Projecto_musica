@@ -121,6 +121,13 @@
                                     <input type="hidden" name="band_name" value="{{ group.project_name }}">
                                     <button type="submit" name="Configuraciones" class="btn btn-custom">Configuraciones</button>
                                 </form>
+
+                                <form method="post" action="">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="band_name" value="{{ group.project_name }}">
+                                    <button type="submit" name="Editar" class="btn btn-custom">Editar</button>
+                                </form>
+
                                 <form method="post" action="">
                                     {% csrf_token %}
                                     <input type="hidden" name="band_name" value="{{ group.project_name }}">

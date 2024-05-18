@@ -55,6 +55,8 @@ urlpatterns = [
     path('create_group/', mainViews.create_groups, name = 'create_groups'),
     path('registro/', viewsRegister.registro, name='registro'),
     path('personal_page/', mainViews.personal, name='profile'),
+    path('edit_profile/', mainViews.edit_profile, name='edit_profile'),
+    path('edit_profile_group/', mainViews.edit_profile_group, name='edit_profile_group'),
     path('group_profile/', mainViews.group_profile, name='group_profile'),
 ]
 

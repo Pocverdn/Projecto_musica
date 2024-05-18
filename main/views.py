@@ -19,6 +19,90 @@ def index(request):
     username = request.session.get('logged_in_user', None)
     return render(request, "index.html")
 
+def edit_profile(request):
+    username = request.session.get('logged_in_user', None)
+    User = user.objects.get(user_name = username)
+    if request.method == "POST":
+        if request.POST.get('description') != "":
+            description = request.POST.get('description')
+            User.description = description
+
+
+        if request.POST.get('genre') != "space":
+            genre = request.POST.get('genre')
+            User.gender = genre
+
+        
+        if request.POST.get('gender') != "space":
+            gender = request.POST.get('gender')
+            User.genre = gender
+
+        if request.POST.get('Ubicación') != "space":
+            location = request.POST.get('Ubicación')
+            User.location = location
+
+        if request.POST.get('Instrumentos') != "space":
+            instruments = request.POST.get('Instrumentos')
+            User.instruments = instruments
+
+        if request.POST.get('experiencia') != "space":
+            exp = request.POST.get('experiencia')
+            print(exp)
+            User.years = int(exp)
+
+        if request.FILES.get('img') is not None:
+            img = request.FILES.get('img')
+            print("HOLA")
+            User.photo = img
+        else:
+            User.photo = User.photo
+
+        User.save()
+
+        
+        return redirect('profile')  
+    return render(request, "edit_profile.html")
+
+
+def edit_profile_group(request):
+    group = project.objects.get(project_name=globals.project_name)
+    print(group.description)
+    if request.method == "POST":
+        if request.POST.get('description') != "":
+            description = request.POST.get('description')
+            group.description = description
+
+
+        if request.POST.get('genre') != "space":
+            genre = request.POST.get('genre')
+            group.genre = genre
+
+    
+        if request.POST.get('location') != "space":
+            location = request.POST.get('location')
+            group.location = location
+
+        if request.POST.get('integrantes') != "space":
+            integrantes = request.POST.get('integrantes')
+            group.num_integrants = integrantes
+
+        if request.POST.get('exp') != "space":
+            exp = request.POST.get('exp')
+            group.years = int(exp)
+
+        if request.FILES.get('img') is not None:
+            img = request.FILES.get('img')
+            print("HOLA")
+            group.photo_project = img
+        else:
+            group.photo_project = group.photo
+
+        group.save()
+
+        
+        return redirect('group_profile')  
+    return render(request, "edit_profile_groups.html")
+
 
 def group_profile(request):
     m = project.objects.get(project_name=globals.project_name)
@@ -79,6 +163,14 @@ def groups(request):
 
         
         limit_bands = False
+
+    if request.method == 'POST' and 'Editar' in request.POST:
+        band_name = request.POST.get('band_name')
+        band = project.objects.get(project_name = band_name)
+
+        globals.project_name = band.project_name
+
+        return redirect('edit_profile_group')
 
     if request.method == 'POST' and 'Configuraciones' in request.POST:
         band_name = request.POST.get('band_name')
