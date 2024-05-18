@@ -144,6 +144,8 @@ def groups(request):
 
 
 def create_groups(request):
+    username = request.session.get('logged_in_user', None)
+    User = user.objects.get(user_name = username)
     if request.method == "POST":
         name = request.POST.get('name')
         description = request.POST.get('description')
@@ -155,6 +157,8 @@ def create_groups(request):
         
         print(integrants)
         print(exp)
+
+        User.add_bands(name)
 
         group = project(project_name=name, genre=genre, location=location, photo_project=img, description=description, num_events=exp, num_integrants=integrants)
         group.save()
