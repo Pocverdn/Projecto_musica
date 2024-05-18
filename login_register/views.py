@@ -14,13 +14,14 @@ def registro(request):
         name = prueba["nombre"]
         surname = prueba["apellido"]
         instruments = prueba["instrumentos"]
+        email = prueba["email"]
         location = prueba["ubicación"]
         genre = prueba["género_biológico"]
         gender = prueba["género_musical"]
         exp = prueba["experiencia_años"]
         description = prueba["descripción"]
         photo = request.FILES.get('img')
-        new_user = user( user_name=username, name=name, surname=surname, gender=gender, password=password, instruments=instruments, genre=genre, years=exp, photo=photo, description=description, location=location)
+        new_user = user( user_name=username, name=name, surname=surname, gender=gender, password=password, instruments=instruments, genre=genre, years=exp, photo=photo, description=description, location=location, email=email)
         
         if form.is_valid():
             new_user.save()

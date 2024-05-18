@@ -10,145 +10,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>results_user</title>
 
-    <style>
+	<style>
+		
         body {
             background-color: black;
             color: white;
         }
 
-        h1 {
-            margin-top: 25px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: left;
-            align-items: left;
-        }
-
-        .result {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            height: 100vh; 
-        }
-
-        .btn-yellow {
-        background-color: #F57D1F;
-        border-color: #F57D1F;
-        }
-
-        .btn-yellow:hover {
-            background-color:#F72798;
-            border-color: #F72798;
-        }
-
-		img.photo {
-			position: fixed;
-			left: 50px;
-			height: 50%;
-			width: 30%;
-			border-radius: 10%;
-			bottom: 400px;
-		}
-
-		img.gif {
-			position: fixed;
-			right: 50px;
-			height: 50%;
-			width: 30%;
-			border-radius: 10%;
-			bottom: 300px;
-		}
 		
-		textarea {
-			width: 100%;
-			height: 300px;
-			border: 0px solid #000;
-			border-radius: 0px;
-			background-color: #000000;
-			font-size: 24px;
-			color: #ffffff;
-			resize: none;
+		img {
+			max-width: 90%;
 		}
-		
-		h2 {
-			left: 100px;
-			bottom: 250px
+		img {
+			vertical-align: middle;
+			border-style: none;
 		}
 
-		h3 {
-			position: absolute;
-			left: 685px;
-			bottom: 800px
+
+		.about-list {
+		padding-top: 10px;
+		}
+		.about-list .media {
+		padding: 5px 0;
+		}
+		.about-list label {
+		color: #F57D1F;
+		font-weight: 600;
+		width: 88px;
+		margin: 0;
+		position: relative;
 		}
 
-		h5 {
-			position: absolute;
-			left: 300px;
-			bottom: 180px
-			
+		.about-list p {
+		margin: 0;
+		font-size: 15px;
 		}
 
-		h6 {
-			font-size: 23px;
-			position: absolute;
-			left: 70px;
-			bottom: 70px
-			
+		@media (max-width: 991px) {
+		.about-avatar {
+			margin-top: 30px;
 		}
-		
-		h7 {
-		font-size: 28px;
-			position: absolute;
-			left: 685px;
-			bottom: 700px
-			
 		}
 
-		
-
-		input[type=button],input[type=submit] {
-			margin: 4px 60px;
-			cursor: pointer;
-			border: none;
-			border-radius: 10%;
-			color: black;
-			background-color: #FFFF00;
-			padding: 16px 30px;
-			font-weight: bold;
-			font-style: italic;
-		}
-		
-    </style>
+	</style>
 </head>
 <body>
 
-    <div class="result">
-		<img class="photo"src="{{ m.photo_project.url }}" alt="{{ m.project_name }} Photo">
-		
-		<h3><i>Género: {{ m.genre }}</i></h3>
-		<h7><i>Numero de integrantes: {{ m.num_integrants }}</i></h7>
-
-		
-		<form method="POST" enctype="multipart/form-data">
-			{% csrf_token %}
-			<h5><input type="submit" name="input" value="Guardar cambios"> <input type="submit" name="input" value="Ver tráiler"></h5>
-			
-
-			<label for="img"></label>
-            <input type="file" name="img" id="img">
-			<h2 rows="10" cols="45"><textarea id="descripcion" name="descripcion" rows="10" cols="45">{{ m.description }}</textarea></h2>
-			
-			<h6>
-				<input type="submit" name="input" value="Administrar grupos">
-				<input type="submit" name="input" value="Explorar ofertas">
-				<input type="submit" name="input" value="Ver Estadisticas">
-			</h6>
-		</form>
-
-		<img class="gif" src="/media/others/BANDMATELOGOVF.gif" alt="Imagen grande">
-
-    </div>
+	<section class="section" id="about">
+		<div class="container">
+			<div class="row align-items-center flex-row-reverse">
+				<div class="col-lg-6">
+					<h1>{{ m.project_name }}</h1>
+					<p>{{m.description}}</p>
+					<div>
+						
+						<div class="row about-list">
+							<div class="col-md-6">
+								<div class="media">
+									<label>Integrantes:</label>
+									<p>{{m.num_integrants}}</p>
+								</div>
+								<div class="media">
+									<label>Ubicación:</label>
+									<p>{{m.location}}</p>
+								</div>
+								<div class="media">
+									<label>Correo:</label>
+									<p>{{m.email}}</p>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="media">
+									<label>Generos:</label>
+									<p>{{m.genre}}</p>
+								</div>
+								<div class="media">
+									<label>Experiencia</label>
+									<p>{{m.num_events}} años</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="about-avatar">
+						<img class = "card-img-top" src="{{ m.photo_project.url }}" title="" alt="">
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 	
 </body>
 </html>

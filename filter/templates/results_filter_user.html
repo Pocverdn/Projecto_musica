@@ -48,7 +48,7 @@
     <h1>Quizás estás buscando a...</h1>
     <div class="result">
         {% for f in fil %}
-            {% if values.0 == f.gender and values.2 == f.instruments and values.3 == f.genre and values.1 >= f.years and values.4 == f.location %}
+            {% if values.0 == f.genre and values.2 == f.instruments and values.3 == f.gender and values.1 >= f.years and values.4 == f.location %}
                 <div class="card" style="width: 18rem;">
                     <img class="card-img-top" src="{{ f.photo.url }}" alt="{{ f.user_name }} Photo">
                     <div class="card-body">

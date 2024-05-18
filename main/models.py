@@ -17,6 +17,7 @@ class user(models.Model):
     description = models.TextField()
     location = models.CharField(max_length=50)
     bands = models.CharField(max_length=1000, blank=True, null=True)
+    email = models.EmailField(unique=True, default="correo@dominio.com")
 
 
     def add_bands(self, band):
@@ -53,6 +54,7 @@ class project(models.Model):
     description = models.TextField()
     num_events = models.IntegerField(default=0)
     num_integrants = models.IntegerField(default=1)
+    email = models.EmailField(default="correo@dominio.com")
 
     def __str__(self):
         return self.project_name

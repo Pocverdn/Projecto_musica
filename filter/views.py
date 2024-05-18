@@ -16,6 +16,8 @@ def filter_user(request):
     contex = {"fil": fil}
     searchTerm = request.GET.get('searchMusician')
 
+    print(fil[0])
+
     if searchTerm:
         musicians=user.objects.filter(user_name__icontains=searchTerm)
 
@@ -92,7 +94,9 @@ def result_user(request):
 
         return redirect(reverse('profile'))
 
+
     fil = user.objects.all()
+    print(results_user)
     values = list(results_user.values())[1:] 
     if values[1] != "space":
         v_1 = int(values[1])
