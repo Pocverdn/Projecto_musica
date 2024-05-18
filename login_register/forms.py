@@ -13,7 +13,6 @@ class RegistroForm(UserCreationForm):
     nombre = forms.CharField(max_length=100)
     apellido = forms.CharField(max_length=100)
     descripción = forms.CharField(max_length=500, widget=forms.Textarea)
-    foto = forms.ImageField(required=False)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -23,4 +22,4 @@ class RegistroForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['username', 'password1', 'password2', 'nombre', 'apellido','instrumentos', 'ubicación', 'género_biológico', 'género_musical', 'experiencia_años', 'descripción', 'foto']
+        fields = ['username', 'password1', 'password2', 'nombre', 'apellido','instrumentos', 'ubicación', 'género_biológico', 'género_musical', 'experiencia_años', 'descripción']

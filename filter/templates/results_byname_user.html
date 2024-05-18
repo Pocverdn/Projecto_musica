@@ -53,7 +53,11 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ m.user_name }}</h5>
                     <p class="card-text">{{ m.description }}</p>
-                    <a href="#" class="btn btn-yellow">Ver perfil</a>
+                    <form method="post" action="">
+                        {% csrf_token %}
+                        <input type="hidden" name="band_name" value="{{  m.user_name }}">
+                        <button type="submit" name="Configuraciones" class="btn btn-yellow">Ver perfil</button>
+                    </form>
                 </div>
             </div>
         {% endfor %}
