@@ -4,6 +4,10 @@ from django.shortcuts import render, redirect
 
 from main.models import user, project
 
+from django.urls import reverse
+
+import globals
+
 results_user = ""
 results_project = ""
 
@@ -14,6 +18,20 @@ def filter_user(request):
 
     if searchTerm:
         musicians=user.objects.filter(user_name__icontains=searchTerm)
+
+        if request.method == 'POST':
+            data = ""
+            data=request.POST
+            print(data)
+
+            globals.user_name = data['band_name']
+
+
+            print(globals.user_name)
+
+            return redirect(reverse('profile'))
+        
+                
         contexBN = {"searchTerm": searchTerm, "musicians": musicians}
         return render(request, "results_byname_user.html", contexBN)
 
@@ -33,6 +51,19 @@ def filter_project(request):
     searchTerm = request.GET.get('searchProjects')
 
     if searchTerm:
+
+        if request.method == 'POST':
+            data = ""
+            data=request.POST
+            print(data)
+
+            globals.project_name = data['band_name']
+
+
+            print(globals.project_name)
+
+            return redirect(reverse('group_profile'))
+        
         projects=project.objects.filter(project_name__icontains=searchTerm)
         contexBN = {"searchTerm": searchTerm, "projects": projects}
         return render(request, "results_byname_project.html", contexBN)
@@ -48,9 +79,21 @@ def filter_project(request):
     
 
 def result_user(request):
+
+    if request.method == 'POST':
+        data = ""
+        data=request.POST
+        print(data)
+
+        globals.user_name = data['band_name']
+
+
+        print(globals.user_name)
+
+        return redirect(reverse('profile'))
+
     fil = user.objects.all()
     values = list(results_user.values())[1:] 
-    print(values)
     if values[1] != "space":
         v_1 = int(values[1])
         values[1] = v_1
@@ -59,6 +102,19 @@ def result_user(request):
 
 
 def result_project(request):
+
+    if request.method == 'POST':
+        data = ""
+        data=request.POST
+        print(data)
+
+        globals.project_name = data['band_name']
+
+
+        print(globals.project_name)
+
+        return redirect(reverse('group_profile'))
+
     fil = project.objects.all()
     values = list(results_project.values())[1:] 
     print(values)

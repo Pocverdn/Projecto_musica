@@ -19,7 +19,7 @@ def registro(request):
         gender = prueba["género_musical"]
         exp = prueba["experiencia_años"]
         description = prueba["descripción"]
-        photo = request.FILES.get('photo') if 'photo' in request.FILES else None
+        photo = request.FILES.get('img')
         new_user = user( user_name=username, name=name, surname=surname, gender=gender, password=password, instruments=instruments, genre=genre, years=exp, photo=photo, description=description, location=location)
         
         if form.is_valid():

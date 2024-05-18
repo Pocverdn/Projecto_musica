@@ -36,8 +36,8 @@ urlpatterns = [
     path('home/', mainViews.index, name='home'), 
     path('map_page/', mainViews.map_view),
     path('graph_page/', mainViews.graph_view,  name='graph_page'),
-    path('map_connect/', mainViews.map_connect),
-    path('home/offer/', offerViews.offers),
+    path('map_connect/', mainViews.map_connect, name='map'),
+    path('home/offer/', offerViews.offers, name='offer'),
     path('offer_post/', offerViews.offers_post),
     path('band_page/', offerViews.choose_band),
     path('band_delete/', offerViews.band_delete),
@@ -54,7 +54,8 @@ urlpatterns = [
     path('home/groups_page/', mainViews.groups,  name='groups_page'),
     path('create_group/', mainViews.create_groups, name = 'create_groups'),
     path('registro/', viewsRegister.registro, name='registro'),
-    path('personal_page/', mainViews.personal),
+    path('personal_page/', mainViews.personal, name='profile'),
+    path('group_profile/', mainViews.group_profile, name='group_profile'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

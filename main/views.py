@@ -6,6 +6,8 @@ from django.contrib.auth.decorators import login_required
 
 from .models import project, user
 
+import globals
+
 band = ""
 
 genre = ""
@@ -17,13 +19,73 @@ def index(request):
     username = request.session.get('logged_in_user', None)
     return render(request, "index.html")
 
-def personal(request):
-    m = user.objects.get(user_name="Santiago Sanchez")
+
+def group_profile(request):
+    m = project.objects.get(project_name=globals.project_name)
     if 'input' in request.POST:
-        global description
-        description = ""
-        description=request.POST
-        m.description = description["w3review"]
+        data = ""
+        data=request.POST
+        print(data)
+
+        if data['input'] == "Guardar cambios":
+            m.description = data["descripcion"]
+            m.photo_project = request.FILES.get('img')
+            m.save()
+            data = ""
+
+        elif data['input'] == "Administrar grupos":
+            data = ""
+            return redirect('groups_page')
+            
+        
+        elif data['input'] == "Explorar ofertas":
+            data = ""
+            return redirect('offer')
+            
+
+        elif data['input'] == "Ver Estadisticas":
+            data = ""
+            return redirect('map')
+        
+    return render(request, "group.html",{"m":m})
+
+def personal(request):
+    if globals.user_name == "":
+        username = request.session.get('logged_in_user', None)
+    else:
+        username = globals.user_name
+
+    print(username)
+
+    m = user.objects.get(user_name=username)
+    globals.user_name = ""
+    if 'input' in request.POST:
+        data = ""
+        data=request.POST
+        print(data)
+
+        if data['input'] == "Guardar cambios":
+            m.description = data["descripcion"]
+            m.photo = request.FILES.get('img')
+
+            m.save()
+            data = ""
+
+        elif data['input'] == "Administrar grupos":
+            data = ""
+            return redirect('groups_page')
+            
+        
+        elif data['input'] == "Explorar ofertas":
+            data = ""
+            return redirect('offer')
+            
+
+        elif data['input'] == "Ver Estadisticas":
+            data = ""
+            return redirect('map')
+            
+
     
     return render(request, "personal.html",{"m":m})
 
@@ -68,10 +130,22 @@ def groups(request):
 
         
         limit_bands = False
+
+    if request.method == 'POST' and 'Configuraciones' in request.POST:
+        band_name = request.POST.get('band_name')
+        band = project.objects.get(project_name = band_name)
+
+        globals.project_name = band.project_name
+
+        return redirect('group_profile')
         
 
     return render(request, "groups_page.html", {'groups': groups, 'limit': limit_bands})
+
+
 def create_groups(request):
+    username = request.session.get('logged_in_user', None)
+    User = user.objects.get(user_name = username)
     if request.method == "POST":
         name = request.POST.get('name')
         description = request.POST.get('description')
@@ -83,6 +157,8 @@ def create_groups(request):
         
         print(integrants)
         print(exp)
+
+        User.add_bands(name)
 
         group = project(project_name=name, genre=genre, location=location, photo_project=img, description=description, num_events=exp, num_integrants=integrants)
         group.save()

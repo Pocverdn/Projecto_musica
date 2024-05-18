@@ -1,0 +1,155 @@
+{% extends 'layout/base_d.html' %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="icon" type="image/png" href="media/others/BANDMATELOGOV2.png"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>results_user</title>
+
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+
+        h1 {
+            margin-top: 25px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: left;
+            align-items: left;
+        }
+
+        .result {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; 
+        }
+
+        .btn-yellow {
+        background-color: #F57D1F;
+        border-color: #F57D1F;
+        }
+
+        .btn-yellow:hover {
+            background-color:#F72798;
+            border-color: #F72798;
+        }
+
+		img.photo {
+			position: fixed;
+			left: 50px;
+			height: 50%;
+			width: 30%;
+			border-radius: 10%;
+			bottom: 400px;
+		}
+
+		img.gif {
+			position: fixed;
+			right: 50px;
+			height: 50%;
+			width: 30%;
+			border-radius: 10%;
+			bottom: 300px;
+		}
+		
+		textarea {
+			width: 100%;
+			height: 300px;
+			border: 0px solid #000;
+			border-radius: 0px;
+			background-color: #000000;
+			font-size: 24px;
+			color: #ffffff;
+			resize: none;
+		}
+		
+		h2 {
+			left: 100px;
+			bottom: 250px
+		}
+
+		h3 {
+			position: absolute;
+			left: 685px;
+			bottom: 800px
+		}
+
+		h5 {
+			position: absolute;
+			left: 300px;
+			bottom: 180px
+			
+		}
+
+		h6 {
+			font-size: 23px;
+			position: absolute;
+			left: 70px;
+			bottom: 70px
+			
+		}
+		
+		h7 {
+		font-size: 28px;
+			position: absolute;
+			left: 685px;
+			bottom: 700px
+			
+		}
+
+		
+
+		input[type=button],input[type=submit] {
+			margin: 4px 60px;
+			cursor: pointer;
+			border: none;
+			border-radius: 10%;
+			color: black;
+			background-color: #FFFF00;
+			padding: 16px 30px;
+			font-weight: bold;
+			font-style: italic;
+		}
+		
+    </style>
+</head>
+<body>
+
+    <div class="result">
+		<img class="photo"src="{{ m.photo_project.url }}" alt="{{ m.project_name }} Photo">
+		
+		<h3><i>Género: {{ m.genre }}</i></h3>
+		<h7><i>Numero de integrantes: {{ m.num_integrants }}</i></h7>
+
+		
+		<form method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			<h5><input type="submit" name="input" value="Guardar cambios"> <input type="submit" name="input" value="Ver tráiler"></h5>
+			
+
+			<label for="img"></label>
+            <input type="file" name="img" id="img">
+			<h2 rows="10" cols="45"><textarea id="descripcion" name="descripcion" rows="10" cols="45">{{ m.description }}</textarea></h2>
+			
+			<h6>
+				<input type="submit" name="input" value="Administrar grupos">
+				<input type="submit" name="input" value="Explorar ofertas">
+				<input type="submit" name="input" value="Ver Estadisticas">
+			</h6>
+		</form>
+
+		<img class="gif" src="/media/others/BANDMATELOGOVF.gif" alt="Imagen grande">
+
+    </div>
+	
+</body>
+</html>
+{% endblock %}
