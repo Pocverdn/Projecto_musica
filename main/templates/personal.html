@@ -117,9 +117,9 @@
 			<h8><img class="logo"src="/media/others/BANDMATELOGOVF.gif" alt="Imagen" style="width: 100%; height: auto;"></h8>
 			<h1><img class="photo"src="{{ m.photo.url }}" alt="{{ m.user_name }} Photo"><h1/>
 			
-			<h3>Genero: {{ m.gender }}</h3>
+			<h3><i>Genero: {{ m.gender }}</i></h3>
 			<!--<h4>{{ m.genre }}</h4>-->
-			<h7>Años de xperiencia: {{ m.years }}</h7>
+			<h7><i>Años de xperiencia: {{ m.years }}</i></h7>
 			
 			<form method="POST" enctype="multipart/form-data">
 				{% csrf_token %}
