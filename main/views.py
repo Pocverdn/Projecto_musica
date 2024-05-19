@@ -95,7 +95,7 @@ def edit_profile_group(request):
             print("HOLA")
             group.photo_project = img
         else:
-            group.photo_project = group.photo
+            group.photo_project = group.photo_project
 
         group.save()
 
