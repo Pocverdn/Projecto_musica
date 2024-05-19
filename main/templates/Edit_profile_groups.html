@@ -1,6 +1,6 @@
 {% extends 'layout/base_g.html' %}
 
-{%load static%}
+{% load static %}
 
 {% block content %}
 <!DOCTYPE html>
@@ -29,16 +29,10 @@
         }
 
         .filter {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             margin-top: 20px;
         }
 
         .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             margin-top: 20px;
         }
 
@@ -75,60 +69,75 @@
         }
     </style>
 </head>
-
 <body>
-    <div class="filter">
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            
-            <label for="description">Descripción</label>
-            <textarea name="description" id="description"></textarea>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-sm-8 col-xs-12 filter">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Descripción</label>
+                        <textarea class="form-control" name="description" id="description"></textarea>
+                    </div>
 
-            <label for="genre">Género</label>
-            <select name="genre" id="genre">
-                <option value="space"></option>
-                <option value="Rock">Rock</option>
-                <option value="Pop">Pop</option>
-                <option value="Jazz">Jazz</option>
-                <option value="Salsa">Salsa</option>
-                <option value="Metal">Metal</option>
-            </select>
+                    <div class="mb-3">
+                        <label for="genre" class="form-label">Género</label>
+                        <select class="form-select" name="genre" id="genre">
+                            <option value="space"></option>
+                            <option value="Rock">Rock</option>
+                            <option value="Pop">Pop</option>
+                            <option value="Jazz">Jazz</option>
+                            <option value="Salsa">Salsa</option>
+                            <option value="Metal">Metal</option>
+                        </select>
+                    </div>
 
-            <label for="location">Ubicación</label>
-            <select name="location" id="location">
-                <option value="space"></option>
-                <option value="Cali">Cali</option>
-                <option value="Medellin">Medellin</option>
-                <option value="Bogota">Bogota</option>
-            </select>
+                    <div class="mb-3">
+                        <label for="location" class="form-label">Ubicación</label>
+                        <select class="form-select" name="location" id="location">
+                            <option value="space"></option>
+                            <option value="Cali">Cali</option>
+                            <option value="Medellin">Medellin</option>
+                            <option value="Bogota">Bogota</option>
+                        </select>
+                    </div>
 
-            <label for="integrantes">Cantidad de integrantes</label>
-            <select name="integrantes" id="integrantes">
-                <option value="space"></option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-            </select>
+                    <div class="mb-3">
+                        <label for="integrantes" class="form-label">Cantidad de integrantes</label>
+                        <select class="form-select" name="integrantes" id="integrantes">
+                            <option value="space"></option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
 
-            <label for="exp">Experiencia</label>
-            <select name="exp" id="exp">
-                <option value="space"></option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-            </select>
+                    <div class="mb-3">
+                        <label for="exp" class="form-label">Experiencia</label>
+                        <select class="form-select" name="exp" id="exp">
+                            <option value="space"></option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
 
-            <label for="img">Foto del grupo</label>
-            <input type="file" name="img" id="img">
-            
-            <input type="submit" value="Crear" class="btn btn-primary btn-custom"/>
-        </form>
+                    <div class="mb-3">
+                        <label for="img" class="form-label">Foto del grupo</label>
+                        <input type="file" class="form-control" name="img" id="img">
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <input type="submit" value="Crear" class="btn btn-primary btn-custom"/>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJL4j0Jpt8tc1H7dYrv9WYp9eLUce/6p1BOiL/azb6x" crossorigin="anonymous"></script>
 </body>
 </html>
-
-
 {% endblock %}

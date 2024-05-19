@@ -1,6 +1,6 @@
 {% extends 'layout/base_g.html' %}
 
-{%load static%}
+{% load static %}
 
 {% block content %}
 <!DOCTYPE html>
@@ -16,7 +16,7 @@
             background-color: black;
             color: white;
             margin: 0;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -29,22 +29,17 @@
         }
 
         .filter {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             margin-top: 20px;
         }
 
         .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             margin-top: 20px;
         }
 
         form {
             display: flex;
             flex-direction: column;
+            margin-top: 65px;
         }
 
         label {
@@ -55,6 +50,9 @@
             margin-top: 5px;
             padding: 5px;
             border-radius: 15px;
+            background-color: #333;
+            color: white;
+            border: 1px solid #555;
         }
 
         textarea {
@@ -75,69 +73,86 @@
         }
     </style>
 </head>
-
 <body>
-    <div class="filter">
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-        
-            <label for="description">Descripción</label>
-            <textarea name="description" id="description"></textarea>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8 col-sm-10 filter">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Descripción</label>
+                        <textarea class="form-control" name="description" id="description"></textarea>
+                    </div>
 
-            <label for="genre">Género</label>
-            <select name="genre" id="genre">
-                <option value="space"></option>
-                <option value="Rock">Rock</option>
-                <option value="Pop">Pop</option>
-                <option value="Jazz">Jazz</option>
-                <option value="Salsa">Salsa</option>
-                <option value="Metal">Metal</option>
-            </select>
+                    <div class="mb-3">
+                        <label for="genre" class="form-label">Género</label>
+                        <select class="form-select" name="genre" id="genre">
+                            <option value="space"></option>
+                            <option value="Rock">Rock</option>
+                            <option value="Pop">Pop</option>
+                            <option value="Jazz">Jazz</option>
+                            <option value="Salsa">Salsa</option>
+                            <option value="Metal">Metal</option>
+                        </select>
+                    </div>
 
-            <label for="gender">Sexo</label>
-            <select name="gender" id="gender">
-                <option value="space"></option>
-                <option value="Mujer">Mujer</option>
-                <option value="Hombre">Hombre</option>
-                <option value="Otro">Otro</option>
-            </select>
+                    <div class="mb-3">
+                        <label for="gender" class="form-label">Sexo</label>
+                        <select class="form-select" name="gender" id="gender">
+                            <option value="space"></option>
+                            <option value="Mujer">Mujer</option>
+                            <option value="Hombre">Hombre</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
 
-            <label for="experiencia">Años de experiencia</label>
-            <select name="experiencia" id="experiencia">
-                <option value="space"></option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="4">5</option>
-            </select>
+                    <div class="mb-3">
+                        <label for="experiencia" class="form-label">Años de experiencia</label>
+                        <select class="form-select" name="experiencia" id="experiencia">
+                            <option value="space"></option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
 
-            <label for="lang">Instrumentos</label>
-            <select name="Instrumentos" id="lang">
-                <option value="space"></option>
-                <option value="Guitarra">Guitarra</option>
-                <option value="Piano">Piano</option>
-                <option value="Bateria">Batería</option>
-                <option value="Bajo">Bajo</option>
-            </select>
+                    <div class="mb-3">
+                        <label for="Instrumentos" class="form-label">Instrumentos</label>
+                        <select class="form-select" name="Instrumentos" id="Instrumentos">
+                            <option value="space"></option>
+                            <option value="Guitarra">Guitarra</option>
+                            <option value="Piano">Piano</option>
+                            <option value="Bateria">Batería</option>
+                            <option value="Bajo">Bajo</option>
+                        </select>
+                    </div>
 
-            <label for="lang">Ubicación</label>
-            <select name="Ubicación" id="lang">
-                <option value="space"></option>
-                <option value="Cali">Cali</option>
-                <option value="Medellin">Medellin</option>
-                <option value="Bogota">Bogota</option>
-            </select>
+                    <div class="mb-3">
+                        <label for="Ubicación" class="form-label">Ubicación</label>
+                        <select class="form-select" name="Ubicación" id="Ubicación">
+                            <option value="space"></option>
+                            <option value="Cali">Cali</option>
+                            <option value="Medellin">Medellin</option>
+                            <option value="Bogota">Bogota</option>
+                        </select>
+                    </div>
 
-            <label for="img">Foto</label>
-            <input type="file" name="img" id="img">
-            
-            <input type="submit" value="Confirmar" class="btn btn-primary btn-custom"/>
-        </form>
+                    <div class="mb-3">
+                        <label for="img" class="form-label">Foto</label>
+                        <input type="file" class="form-control" name="img" id="img">
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <input type="submit" value="Confirmar" class="btn btn-primary btn-custom"/>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJL4j0Jpt8tc1H7dYrv9WYp9eLUce/6p1BOiL/azb6x" crossorigin="anonymous"></script>
 </body>
 </html>
-
-
 {% endblock %}

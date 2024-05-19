@@ -1,6 +1,6 @@
 {% extends 'layout/base_g.html' %}
 
-{%load static%}
+{% load static %}
 
 {% block content %}
 <!DOCTYPE html>
@@ -16,11 +16,12 @@
             background-color: black;
             color: white;
             margin: 0;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            padding: 20px;
         }
 
         h1 {
@@ -29,20 +30,16 @@
         }
 
         .filter {
+            width: 100%;
+            max-width: 500px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 20px;
-        }
-
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
+            margin-top: 90px;
         }
 
         form {
+            width: 100%;
             display: flex;
             flex-direction: column;
         }
@@ -53,8 +50,10 @@
 
         select, input, textarea {
             margin-top: 5px;
-            padding: 5px;
+            padding: 10px;
             border-radius: 15px;
+            border: none;
+            width: 100%;
         }
 
         textarea {
@@ -64,32 +63,36 @@
 
         .btn-custom {
             background-color: white;
-            border-radius: 15px; 
+            border-radius: 15px;
             margin-top: 10px;
             color: black;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
         }
 
         .btn-custom:hover {
             background-color: #F72798;
-            color: white; 
+            color: white;
         }
     </style>
 </head>
 
 <body>
     <div class="filter">
+        <h1>Crear un nuevo grupo</h1>
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             
             <label for="name">Nombre del grupo</label>
-            <input type="text" name="name" id="name">
+            <input type="text" name="name" id="name" required>
 
             <label for="description">Descripción</label>
-            <textarea name="description" id="description"></textarea>
+            <textarea name="description" id="description" required></textarea>
 
             <label for="genre">Género</label>
-            <select name="genre" id="genre">
-                <option value="space"></option>
+            <select name="genre" id="genre" required>
+                <option value="" disabled selected>Selecciona un género</option>
                 <option value="Rock">Rock</option>
                 <option value="Pop">Pop</option>
                 <option value="Jazz">Jazz</option>
@@ -98,16 +101,16 @@
             </select>
 
             <label for="location">Ubicación</label>
-            <select name="location" id="location">
-                <option value="space"></option>
+            <select name="location" id="location" required>
+                <option value="" disabled selected>Selecciona una ubicación</option>
                 <option value="Cali">Cali</option>
                 <option value="Medellin">Medellin</option>
                 <option value="Bogota">Bogota</option>
             </select>
 
             <label for="integrantes">Cantidad de integrantes</label>
-            <select name="integrantes" id="integrantes">
-                <option value="space"></option>
+            <select name="integrantes" id="integrantes" required>
+                <option value="" disabled selected>Selecciona la cantidad</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -115,8 +118,8 @@
             </select>
 
             <label for="exp">Experiencia</label>
-            <select name="exp" id="exp">
-                <option value="space"></option>
+            <select name="exp" id="exp" required>
+                <option value="" disabled selected>Selecciona la experiencia</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -124,14 +127,11 @@
             </select>
 
             <label for="img">Foto del grupo</label>
-            <input type="file" name="img" id="img">
+            <input type="file" name="img" id="img" required>
             
-            <input type="submit" value="Crear" class="btn btn-primary btn-custom"/>
+            <input type="submit" value="Crear" class="btn btn-primary btn-custom">
         </form>
     </div>
-
 </body>
 </html>
-
-
 {% endblock %}

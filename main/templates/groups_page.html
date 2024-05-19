@@ -16,11 +16,12 @@
             background-color: black;
             color: white;
             margin: 0;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            padding: 20px;
         }
 
         .content-container {
@@ -28,7 +29,6 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
-            flex: 1; 
             width: 100%;
         }
 
@@ -40,64 +40,62 @@
         .image {
             max-width: 100%;
             max-height: 100%;
-            border-radius: 10px; 
+            border-radius: 10px;
         }
 
         .card {
-            width: 350px; 
-            height: 350px; 
-            margin-right: 200px; /* Espacio entre las tarjetas */
-            background-color: white; 
-            color: black; 
-            margin-bottom: 150px;
+            width: 100%;
+            max-width: 350px;
+            min-width: 280px; /* Ancho mínimo para las tarjetas */
+            margin: 10px;
+            background-color: white;
+            color: black;
         }
 
         .card-img-top {
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
-            height: 60%; /* Altura de la imagen */
-            object-fit: cover; /* Ajusta la imagen dentro de la tarjeta */
+            height: 200px;
+            object-fit: cover;
         }
 
         .card-body {
-            background-color: white; /* Color de fondo de la tarjeta */
-            color: black; /* Color del texto */
-            border-color: transparent;
+            background-color: white;
+            color: black;
             border-bottom-left-radius: 10px;
             border-bottom-right-radius: 10px;
-            height: 70%; /* Altura del cuerpo de la tarjeta */
             padding: 10px;
         }
 
         .btn-custom {
             background-color: #F57D1F;
-            border-radius: 15px; 
-            
+            border-radius: 15px;
+            border: none;
+            padding: 5px 10px;
+            margin: 5px 0;
         }
 
         .btn-custom:hover {
             background-color: #F72798;
-            color: white; 
+            color: white;
         }
 
         .link {
-            font-size: 20px; 
-            text-decoration: underline; 
-            margin-top: 50px; 
+            font-size: 20px;
+            text-decoration: underline;
+            margin-top: 50px;
             text-decoration-color: white;
-            color: white; /* Color del enlace */
+            color: white;
         }
 
         .link:hover {
-            color: #F72798; /* Color del enlace al hacer hover */
+            color: #F72798;
         }
 
-        h1{
-            margin-top: 1300px;
+        h1 {
+            margin-top: 90px;
         }
-
     </style>
-    
 </head>
 <body>
 
@@ -106,36 +104,34 @@
         <h1>Estos son tus grupos:</h1>
         <br>
         {% if groups %}
-            <div class="row">
+            <div class="row justify-content-center">
                 {% for group in groups %}
-                <div class="col-md-4">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center">
                     <div class="card">
                         <img src="{{ group.photo_project.url }}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">{{ group.project_name }}</h5>
                             <p class="card-text">{{ group.description }}</p>
 
-                            <div class="d-flex justify-content-between">
+                            <div class="d-grid gap-2">
                                 <form method="post" action="">
                                     {% csrf_token %}
                                     <input type="hidden" name="band_name" value="{{ group.project_name }}">
-                                    <button type="submit" name="Configuraciones" class="btn btn-custom">Configuraciones</button>
+                                    <button type="submit" name="Configuraciones" class="btn btn-custom w-100">Configuraciones</button>
                                 </form>
 
                                 <form method="post" action="">
                                     {% csrf_token %}
                                     <input type="hidden" name="band_name" value="{{ group.project_name }}">
-                                    <button type="submit" name="Editar" class="btn btn-custom">Editar</button>
+                                    <button type="submit" name="Editar" class="btn btn-custom w-100">Editar</button>
                                 </form>
 
                                 <form method="post" action="">
                                     {% csrf_token %}
                                     <input type="hidden" name="band_name" value="{{ group.project_name }}">
-                                    <button type="submit" name="Borrar" class="btn btn-custom">Borrar</button>
+                                    <button type="submit" name="Borrar" class="btn btn-custom w-100">Borrar</button>
                                 </form>
                             </div>
-
-                            
                         </div>
                     </div>
                 </div>
@@ -150,8 +146,6 @@
         <br>
         {% if limit == False %}
             <a href="/create_group/" class="link">Crea un nuevo grupo</a>
-        {% else %}
-            
         {% endif %}
         <br>
         <br>
@@ -161,3 +155,4 @@
 </body>
 </html>
 {% endblock %}
+
