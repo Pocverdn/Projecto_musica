@@ -32,7 +32,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', viewsRegister.custom_login, name='login'),  
-    path('logout/', LogoutView.as_view(next_page=reverse_lazy('login')), name='logout'),
+    path('logout/', LogoutView.as_view(next_page=''), name='logout'),
     path('home/', mainViews.index, name='home'), 
     path('map_page/', mainViews.map_view),
     path('graph_page/', mainViews.graph_view,  name='graph_page'),
