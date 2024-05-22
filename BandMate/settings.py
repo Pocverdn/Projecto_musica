@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = 'home/'
-LOGOUT_REDIRECT_URL = 'login'
+LOGOUT_REDIRECT_URL = reverse_lazy('login')
 
 
 # Quick-start development settings - unsuitable for production
