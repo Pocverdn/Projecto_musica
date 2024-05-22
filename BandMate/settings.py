@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 
-from django.urls import reverse_lazy
-
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -22,7 +20,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = 'home/'
-LOGOUT_REDIRECT_URL = reverse_lazy('login')
 
 
 # Quick-start development settings - unsuitable for production
