@@ -331,7 +331,7 @@ def map_view(request):
     map_html2 = p._repr_html_()
 
     
-    if genre['Genre'] == "populares":
+    if genre['Genre'] == "Populares":
         return render(request, 'map.html', {'map_html': map_html2})
     elif genre['Genre'] == "Grafica":
         do_graph()
